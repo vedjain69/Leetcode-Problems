@@ -1,0 +1,24 @@
+class Solution {
+public:
+    int numSteps(string s) {
+        int steps=0;
+        while(s!="1"){
+            int sz= s.length();
+            if (s[sz-1]=='0'){
+                s.pop_back();
+            }else{
+                int a= sz-1;
+                while(a>=0 && s[a]=='1'){
+                    s[a]='0';
+                    a--;
+                }
+
+                if(a>=0){
+                    s[a]='1';
+                }else{
+                    s.insert(s.begin(),'1');
+                }
+            }steps++;
+        }return steps;
+    }
+};
