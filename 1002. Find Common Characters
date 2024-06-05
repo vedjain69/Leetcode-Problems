@@ -1,0 +1,31 @@
+class Solution {
+public:
+    vector<string> commonChars(vector<string>& words) {
+        vector<vector<int>> commons;
+        vector<string> results;
+        for( int i =0; i<words.size(); i++){
+            vector<int> alphabets(26,0);
+            for(char& ch : words[i]){
+                alphabets[ch-'a']++;
+            }commons.push_back(alphabets);
+        }
+
+        for( int i=0; i<26; i++){
+            int count=0;
+            for(int j=0;j<words.size();j++){
+                if(commons[j][i]!=0) count++;
+            }
+            if(count==words.size()){
+                vector<int> mins;
+                for( int j =0;j<words.size();j++){
+                    mins.push_back(commons[j][i]);
+                }
+                auto  mini=min_element(mins.begin(),mins.end());
+                for(int k=0;k<*mini; k++){
+                    string charStr(1, 'a' + i);
+                    results.push_back(charStr);
+                }
+            }
+        } return results;
+    }
+};
